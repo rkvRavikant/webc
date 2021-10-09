@@ -13,8 +13,9 @@ public class Main {
 			System.err.println("Strated App");
 			String url = main.readInputUrl(args);
 			UrlConnectionReader urlConnectionReader = new UrlConnectionReader(url);
-			ForkJoinPool forkJoinPool = ForkJoinPool.commonPool();
-			forkJoinPool.invoke(urlConnectionReader);
+			ForkJoinPool forkJoinPool = new ForkJoinPool();
+			forkJoinPool.execute(urlConnectionReader);
+			urlConnectionReader.join();
 			System.err.println("End App");
 			
 		} catch (Exception e) {
